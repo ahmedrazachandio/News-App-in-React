@@ -24,7 +24,7 @@ const Content = () =>{
             }
           };
           
-          axios.request(options).then(function (response) {
+          axios(options).then(function (response) {
               console.log(response.data);
           }).catch(function (error) {
               console.error(error);
