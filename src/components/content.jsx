@@ -9,7 +9,10 @@ const Content = () =>{
     const [data, setData] = useState([]);
     const [query, setQuery] = useState("");
 
-    const getNews = () => {
+    
+
+    const getNews = (e) => {
+        e.preventDefault();
         const options = {
             method: 'GET',
             url: 'https://bing-news-search1.p.rapidapi.com/news',
@@ -26,6 +29,7 @@ const Content = () =>{
           }).catch(function (error) {
               console.error(error);
           })
+        
 
 
     }
