@@ -13,10 +13,12 @@ const Content = () =>{
 
     const getNews = (e) => {
         e.preventDefault();
+
+
         const options = {
             method: 'GET',
             url: 'https://bing-news-search1.p.rapidapi.com/news',
-            params: { q: query , textFormat: 'Raw'},
+            params: {safeSearch: 'Off', textFormat: 'Raw'},
             headers: {
               'X-BingApis-SDK': 'true',
               'X-RapidAPI-Key': 'a93329cbabmsh9ca76fc55b4a6fdp10e1b3jsnf6130f9ca298',
@@ -24,11 +26,15 @@ const Content = () =>{
             }
           };
           
-          axios(options).then(function (response) {
+          axios
+          .request(options)
+          .then(function (response) {
               console.log(response.data);
-          }).catch(function (error) {
-              console.error(error);
+              setData(response.data.value)
           })
+          .catch(function (error) {
+              console.error(error);
+          });
         
 
 
@@ -45,6 +51,21 @@ const Content = () =>{
             }}
             />
             <button type="submit">Get News</button>
+            <div className="card">
+                {data.map(eachPost => (<div className="card1">
+                    <img src={eachPost.image.thumbnail.contentUrl} alt="" />
+                    <h3 className="">{eachPost.name}</h3>
+                    <p>{eachPost.description}</p>
+
+                </div>))}
+            </div>
+            {/* <div className="card">
+                <img src="https://www.gannett-cdn.com/presto/2022/10/23/PPHX/b9801a15-6f44-453f-a1a3-eed7fdceec17-Lake_AZ7_2.jpg?auto=webp&crop=5203,2927,x0,y350&format=pjpg&width=1200" alt="" />
+                <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, cumque!</h3>
+            </div> */}
+            
+           
+
 
            </form>
         </div>
